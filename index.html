@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Миша</title>
+  <title>Захар</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -78,8 +78,8 @@
     const btn = document.getElementById('mishaBtn');
     const container = document.getElementById('mishaContainer');
     
-    // Массив с текстами, которые будут вылетать
-    const texts = ['Миша', 'Захар Дурак'];
+    // Текст, который будет вылетать
+    const textToSpam = 'Захар Дурак';
     
     let isSpamming = false;
 
@@ -92,10 +92,7 @@
       function createName() {
         const span = document.createElement('span');
         
-        // Случайным образом выбираем текст из массива
-        const randomText = texts[Math.floor(Math.random() * texts.length)];
-        
-        span.textContent = randomText;
+        span.textContent = textToSpam;
         span.className = 'misha-name';
         
         const top = Math.random() * 100;
@@ -112,6 +109,7 @@
         container.appendChild(span);
       }
 
+      // Бесконечное появление
       setInterval(createName, 30);
     });
   </script>
