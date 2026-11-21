@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Миша</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .center-btn {
+      padding: 20px 50px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background-color: #ffffff;
+      color: #000000;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .center-btn:hover {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    #mishaContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000000;
+      z-index: 9999;
+      display: none; 
+      overflow: hidden;
+    }
+
+    .misha-name {
+      position: absolute;
+      color: #ffffff;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      animation: popIn 0.5s forwards;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="mishaBtn" class="center-btn">Нажми на меня</button>
+
+  <div id="mishaContainer"></div>
+
+  <script>
+    const btn = document.getElementById('mishaBtn');
+    const container = document.getElementById('mishaContainer');
+    
+    // Массив с текстами, которые будут вылетать
+    const texts = ['Миша', 'Захар Дурак'];
+    
+    let isSpamming = false;
+
+    btn.addEventListener('click', function() {
+      if (isSpamming) return;
+      isSpamming = true;
+
+      container.style.display = 'block';
+      
+      function createName() {
+        const span = document.createElement('span');
+        
+        // Случайным образом выбираем текст из массива
+        const randomText = texts[Math.floor(Math.random() * texts.length)];
+        
+        span.textContent = randomText;
+        span.className = 'misha-name';
+        
+        const top = Math.random() * 100;
+        const left = Math.random() * 100;
+        span.style.top = top + '%';
+        span.style.left = left + '%';
+        
+        const size = Math.random() * 3 + 1;
+        span.style.fontSize = size + 'rem';
+        
+        const rotate = Math.random() * 360;
+        span.style.transform = `rotate(${rotate}deg)`;
+
+        container.appendChild(span);
+      }
+
+      setInterval(createName, 30);
+    });
+  </script>
+</body>
+</html>
